@@ -11,45 +11,41 @@ var generateBtn = document.querySelector("#generate");
 function generatePassword() {
     var randomPassword = "";
     var criteria = getCriteria();
-    console.log(criteria.passwordLength);
     //create array that holds all possible characters based on user criteria
-    var possibleCharacters = []
+    var possibleCharacters = [];
     
     //check user criteria and add characters to possibleCharacters array based on feedback
     if (criteria.lower) {
-        console.log(possibleCharacters)
-        possibleCharacters = possibleCharacters.concat(lowercase)
-        console.log(possibleCharacters)
+        possibleCharacters = possibleCharacters.concat(lowercase);
+        randomPassword = randomPassword + randomElement(lowercase);
     }
 
     if (criteria.upper) {
-        console.log(possibleCharacters)
-        possibleCharacters = possibleCharacters.concat(uppercase)
-        console.log(possibleCharacters)
+        possibleCharacters = possibleCharacters.concat(uppercase);
+        randomPassword = randomPassword + randomElement(uppercase);
     }
 
     if (criteria.number) {
-        console.log(possibleCharacters)
-        possibleCharacters = possibleCharacters.concat(numbers)
-        console.log(possibleCharacters)
+        possibleCharacters = possibleCharacters.concat(numbers);
+        randomPassword = randomPassword + randomElement(numbers);
     }
 
     if (criteria.special) {
-        console.log(possibleCharacters)
-        possibleCharacters = possibleCharacters.concat(specialCharacters)
-        console.log(possibleCharacters)
+        possibleCharacters = possibleCharacters.concat(specialCharacters);
+        randomPassword = randomPassword + randomElement(specialCharacters);
+        
     }
     //use length value from user input to generate password
-    for(i = 0; i < criteria.passwordLength; i++) {
+    for(var i = randomPassword.length; i < criteria.passwordLength; i++) {
         randomPassword = randomPassword + randomElement(possibleCharacters);
     }
+    
     return randomPassword;
 }
     
 //prompts user to choose criteria for password/stores that information
 function getCriteria() {
     var length = prompt('How long would you like your password to be? (select between 8-128 characters)', 8);
-    console.log(length);
     if (length < 8 || length > 128 || isNaN(length) === true) {
         alert('invalid length')
         return
@@ -76,7 +72,6 @@ function getCriteria() {
         special: spec,
         number: num
     }
-    console.log(preferences);
 
     return preferences
 }
